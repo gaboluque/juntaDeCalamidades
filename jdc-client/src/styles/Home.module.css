@@ -1,0 +1,11 @@
+.container {
+}
+
+.main {
+    min-height: 100vh;
+    max-width: 1160px;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
