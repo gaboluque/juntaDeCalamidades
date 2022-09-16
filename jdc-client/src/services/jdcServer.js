@@ -26,6 +26,5 @@ export const addPixel = async (x, y, color) => {
 export const connectToSocket = () => {
   const newSocket = io(serverUrl);
   newSocket.connect();
-
   return newSocket;
 }
