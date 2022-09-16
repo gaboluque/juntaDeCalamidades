@@ -2,10 +2,7 @@ const http = require("http");
 const express = require("express");
 const cors = require("cors");
 const socketio = require("socket.io");
-const createAdapter = require("@socket.io/redis-adapter").createAdapter;
-const redis = require("redis");
 require("dotenv").config();
-const { createClient } = redis;
 const { connectDB } = require("./db");
 const { onJoin } = require("./services/onJoin");
 const Messages = require("./utils/messages");
@@ -34,10 +31,6 @@ let messages;
 let boards;
 
 (async () => {
-  let pubClient = createClient({ url: "redis://127.0.0.1:6379" });
-  await pubClient.connect();
-  let subClient = pubClient.duplicate();
-  io.adapter(createAdapter(pubClient, subClient));
   db = await connectDB();
   users = new Users(db);
   messages = new Messages(db);
