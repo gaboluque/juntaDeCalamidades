@@ -14,6 +14,7 @@ export const PixelBoard = () => {
   let fg = useRef(null);
   let pixelColor = useRef("#000000");
   const [loading, setLoading] = useState(true);
+  let mouseDown = useRef(false);
 
   useEffect(() => {
     const bgCanvas = bgRef.current;
@@ -23,11 +24,15 @@ export const PixelBoard = () => {
     fg.current = fgCanvas.getContext("2d");
 
     fgCanvas.addEventListener('mousemove', onMouseMove);
-    fgCanvas.addEventListener('click', drawPixel);
+    fgCanvas.addEventListener('click', onMouseClick);
+    fgCanvas.addEventListener('mousedown', onMouseDown);
+    fgCanvas.addEventListener('mouseup', onMouseDown);
 
     return () => {
       fgCanvas.removeEventListener('mousemove', onMouseMove);
-      fgCanvas.removeEventListener('click', drawPixel);
+      fgCanvas.removeEventListener('click', onMouseClick);
+      fgCanvas.removeEventListener('mousedown', onMouseDown);
+      fgCanvas.removeEventListener('mouseup', onMouseDown);
     }
   }, []);
 
@@ -55,6 +60,14 @@ export const PixelBoard = () => {
     });
   }
 
+  function onMouseDown() {
+    mouseDown.current = true;
+  }
+
+  function onMouseUp() {
+    mouseDown.current = false;
+  }
+
   function onMouseMove(event) {
     if (!fg || !bg) return;
 
@@ -76,6 +89,10 @@ export const PixelBoard = () => {
     drawPointer(circle_x, circle_y, 'red', PIXEL_SIZE - 6);
     drawPointer(circle_x, circle_y, 'white', PIXEL_SIZE - 4);
     drawPointer(circle_x, circle_y, 'black', PIXEL_SIZE);
+
+    if (mouseDown.current) {
+      drawPixel();
+    }
   }
 
   function drawPointer(x, y, color, radius) {
@@ -93,6 +110,11 @@ export const PixelBoard = () => {
       x: (evt.clientX - rect.left - 20) / (rect.right - rect.left) * canvas.width,
       y: (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
     };
+  }
+
+  function onMouseClick() {
+    drawPixel();
+    mouseDown.current = false;
   }
 
   function drawPixel() {
@@ -148,6 +170,8 @@ export const PixelBoard = () => {
   const onPixelColorChange = (e) => {
     pixelColor.current = e.target.value;
   }
+
+  console.log(mouseDown.current);
 
   return (
     <div className="board-container">
