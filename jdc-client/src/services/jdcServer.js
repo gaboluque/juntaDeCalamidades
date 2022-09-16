@@ -2,7 +2,7 @@ import axios from "axios";
 import { io } from "socket.io-client";
 
 
-export const serverUrl = "http://192.168.0.6:3001";
+export const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export const getBoard = async () => {
   try {
