@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-    background-image: URL("/img/artwork.png");
+    background-image: URL("/img/background.jpg");
     background-size: cover;
 }
 
@@ -83,4 +83,8 @@ a {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.9);
+}
+
+input[type="text"], textarea {
+    color: white;
 }

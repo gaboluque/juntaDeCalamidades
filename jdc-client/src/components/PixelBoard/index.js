@@ -171,8 +171,6 @@ export const PixelBoard = () => {
     pixelColor.current = e.target.value;
   }
 
-  console.log(mouseDown.current);
-
   return (
     <div className="board-container">
       {loading && <div className="loading-screen">Cargando...</div>}

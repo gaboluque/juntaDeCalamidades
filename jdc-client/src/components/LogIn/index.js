@@ -38,7 +38,7 @@ const LogIn = ({ onSubmit }) => {
         </div>
         <div className="flex right-0 justify-center items-center inset-y-0 sm:flex">
           <button type="submit"
-                  className="inline-flex items-center justify-center px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none">
+                  className="inline-flex items-center justify-center px-4 py-3 transition duration-500 ease-in-out bg-white text-black focus:outline-none">
             Entrar
           </button>
         </div>

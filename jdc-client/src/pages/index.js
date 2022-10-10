@@ -57,11 +57,25 @@ export default function Home() {
 
   }, []);
 
-  const handleConnect = (username, color) => {
+  useEffect(() => {
+    if (socket) {
+      const existingUser = JSON.parse(localStorage.getItem("jdc-user"));
+      if (existingUser && existingUser.username) {
+        handleConnect(existingUser.username, existingUser.color);
+      }
+    }
+
+    return () => {
+      if (socket) socket.emit("logOut");
+    }
+  }, [socket]);
+
+  function handleConnect(username, color) {
     if (socket) {
       socket.emit("joinRoom", { username });
       setUsername(username);
       setMessageColor(color);
+      localStorage.setItem("jdc-user", JSON.stringify({ username, color }));
     }
   }
 

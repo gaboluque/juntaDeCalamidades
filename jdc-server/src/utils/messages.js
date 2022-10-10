@@ -11,8 +11,9 @@ class Messages {
     return this.msgCollection.find().sort({ createdAt: 1 }).limit(quantity);
   }
 
-  newMessage(message) {
-    return this.msgCollection.insertOne({ ...message, createdAt: new Date() });
+  async newMessage(message) {
+    const { insertedId } = await this.msgCollection.insertOne({ ...message, createdAt: new Date() });
+    return insertedId;
   }
 
   formatMessage(username, text, color) {

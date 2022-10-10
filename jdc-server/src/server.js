@@ -43,6 +43,7 @@ let boards;
     socket.on("chatMessage", await onChatMessage(socket, users, messages));
     socket.on("pixelAdded", await onPixelAdded(socket, users, boards));
     socket.on("disconnect", await onDisconnect(socket, users, messages));
+    socket.on("logOut", await onDisconnect(socket, users, messages));
   });
 
   app.get("/", (req, res) => {
