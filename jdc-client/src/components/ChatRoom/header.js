@@ -35,6 +35,12 @@ export const Header = ({ handleTab }) => {
             Libro
           </a>
         </li>
+        <li className="mr-2" onClick={() => handleTab("manifest")}>
+          <a href="#"
+             className={`inline-block p-4 border-2 border-white bg-transparent text-white hover:bg-gray-700`}>
+            Manifesto
+          </a>
+        </li>
       </ul>
     </div>
   );

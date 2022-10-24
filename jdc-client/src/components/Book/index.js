@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { getAllBookPages, uploadBookPage } from "../../services/s3";
+import Image from "next/image";
 
 const BOOK_BASE_URL = 'https://jdc-bucket.s3.amazonaws.com/book';
 
@@ -11,6 +12,7 @@ const get3DigitNumber = (number) => {
 
 export const Book = () => {
   const [pages, setPages] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchPages = () => {
     getAllBookPages((err, data) => {
@@ -24,6 +26,7 @@ export const Book = () => {
           url: `${BOOK_BASE_URL}/${pageId}.jpg`
         }
       }));
+      setLoading(false);
     });
   }
 
@@ -34,29 +37,29 @@ export const Book = () => {
 
     return () => clearInterval(interval);
   }, []);
-  
+
   const handleFileChange = (e) => {
-    console.log(e.target.files);
     if (e.target.files.length > 0) {
       const file = e.target.files[0];
       uploadBookPage(file, get3DigitNumber(pages.length), (err, url) => {
-        if(err) return;
+        if (err) return;
         fetchPages();
       });
     }
   }
 
   return (
-    <div>
+    <div className="book-container">
+      {loading && <div>Cargando, calma...</div>}
       {pages.map((page) => (
         <img key={page.id}
-             className="book-page"
-             src={page.url} alt="book page"
-             onError={e => e.target.style.display = 'none'}
+               className="book-page"
+               src={`${page.url}?${new Date().getTime()}`}
+               alt="book page"
+               onError={e => e.target.style.display = 'none'}
         />
       ))}
-      <input type="file" placeholder="Colabore" onChange={handleFileChange} multiple={false} accept="image/jpg"/>
-
+      {/*<input type="file" placeholder="Colabore" onChange={handleFileChange} multiple={false} accept="image/jpg"/>*/}
     </div>
   );
 };

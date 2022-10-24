@@ -5,6 +5,7 @@
 html {
     background-image: URL("/img/background.jpg");
     background-size: cover;
+    background-repeat: repeat;
 }
 
 html,
@@ -14,6 +15,10 @@ body {
     font-family: Courier, monospace;
     color: white;
     font-size: 16px;
+}
+
+#chatRoom {
+    height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -87,4 +92,23 @@ a {
 
 input[type="text"], textarea {
     color: white;
+}
+
+
+#messages {
+    max-height: 700px;
+}
+
+.book-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.book-container img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
 }

@@ -24,7 +24,12 @@ const LogIn = ({ onSubmit }) => {
 
   return (
     <div className="bg-black p-3 md:p-10 w-full md:w-1/2 m-auto mt-32">
-      <h3 className="text-3xl text-center mb-10">Ingresa a la junta de calamidades</h3>
+      <h3 className="text-2xl text-center mb-10">
+        Deja tus pensamientos más crudos y oscuros, habla desde tus tripas, grita tu dolor y tu tristeza, todas almas rotas nos unen nuestras heridas, nuestras grietas son similares y nuestra sangre toda siempre es rojas
+        <br/>
+        <br/>
+        Entra
+      </h3>
       <form onSubmit={handleSubmit}>
         <input value={username} onChange={(e) => setUsername(e.target.value)} type="text"
                placeholder="Nombre de usuario"

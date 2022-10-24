@@ -16,8 +16,10 @@ const onJoin = (socket, Users, Messages, Boards) => errorHandler(async ({ userna
   const board = await Boards.getBoard();
   socket.emit("board", board.pixels);
 
+  console.log(`User ${user.username} joined the room ${user.room}`);
+
   // Welcome current user
-  socket.emit("welcome", Messages.formatMessage(botName, `Bienvenido, ${username}!`));
+  socket.emit("welcome", Messages.formatMessage(botName, `Bienvenido, ${username}. Cuéntame por qué sufres?`));
 
   // Broadcast when a user connects
   socket.broadcast
