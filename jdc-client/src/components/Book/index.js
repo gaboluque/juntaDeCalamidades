@@ -53,7 +53,7 @@ export const Book = () => {
       {loading && <div>Cargando, calma...</div>}
       {pages.map((page) => (
         <img key={page.id}
-               className="book-page"
+               className="book-page mb-10"
                src={`${page.url}?${new Date().getTime()}`}
                alt="book page"
                onError={e => e.target.style.display = 'none'}
